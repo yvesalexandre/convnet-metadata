@@ -1,7 +1,7 @@
 
 ConvNet on mobile metadata
 =====================================
-This repository contains the Caffe definition files used for our paper 'Using Deep Learning to Predict Demographics from Mobile Phone Metadata' that is submitted to ICLR 2016. Below is a short description on how to use our ConvNet architecture in Caffe.
+This repository contains the Caffe definition files used for our paper 'Using Deep Learning to Predict Demographics from Mobile Phone Metadata' that is submitted to KDD 2016. Below is a short description on how to use our ConvNet architecture in Caffe.
 
 Prepare the Dataset
 -------------------
@@ -14,5 +14,9 @@ We use Bayesian optimization to find a good set of hyperparameters for our ConvN
 Training and Testing
 --------------------------------------
 You should be good to go once the solver.prototxt and prototxt files for the architecture have been adjusted according to your hyperparameters and file structure. Any version of Caffe released after September 1, 2015 should be able to use the ConvNet architecture. Examples of how to train and run a model in Caffe can be found at https://github.com/BVLC/caffe.
+
+Pretrained Models
+--------------------------------------
+These will be uploaded soon.
 
 Feel free to send any questions to bfelbo@dtu.dk.
