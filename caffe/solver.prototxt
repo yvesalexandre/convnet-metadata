@@ -1,6 +1,5 @@
 # The train/test net protocol buffer definition
-train_net: "convnet_mobilemetadata/prototxt/train.prototxt"
-test_net: "convnet_mobilemetadata/prototxt/val.prototxt"
+train_net: ".../convnet.prototxt"
 # Test_iter specifies how many forward passes the test should carry out.
 # It should be set to the size of the validation set divided by the batch_size (256).
 test_iter: <insert>
@@ -17,9 +16,9 @@ power: 0.75
 # Display loss every 500 iterations
 display: 500
 # The maxinum number of iterations
-max_iter: 240000
+max_iter: 400000
 # snapshot intermediate results
 snapshot: 5000
-snapshot_prefix: "convnet_mobilemetadata/snapshots"
+snapshot_prefix: ".../snapshot"
 solver_mode: GPU
 random_seed: 888

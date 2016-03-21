@@ -1,29 +1,28 @@
 name: "CDR-CNN"
-layer {
+layers {
   name: "data"
-  type: "HDF5Data"
+  type: HDF5_DATA
   top: "data"
   top: "label"
   hdf5_data_param {
-    source: <insert>
+    source: "/home/bjarke/caffe/trydeeplearning/convmeta/convmeta/deep/data/train.txt"
     batch_size: 256
-	shuffle: false
+    shuffle: false
   }
 }
-# hzvt = horisontal -> vertical
-layer {
+layers {
   name: "hzvt1"
-  type: "Convolution"
+  type: CONVOLUTION
   bottom: "data"
   top: "hzvt1"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
+  blobs_lr: 1
+  blobs_lr: 2
   convolution_param {
-    num_output: <insert>
+    num_output: 26
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
     weight_filler {
       type: "msra"
       variance_norm: AVERAGE
@@ -31,34 +30,30 @@ layer {
     bias_filler {
       type: "constant"
     }
-    kernel_h: 1
-    kernel_w: 4
-    stride_h: 1
-    stride_w: 1
   }
 }
-layer {
+layers {
   name: "relu_hzvt1"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "hzvt1"
   top: "hzvt1"
 }
-layer {
+layers {
   name: "hzvt2"
-  type: "Convolution"
+  type: CONVOLUTION
   bottom: "hzvt1"
   top: "hzvt2"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
+  blobs_lr: 1
+  blobs_lr: 2
   convolution_param {
-    num_output: <insert>
+    num_output: 39
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
     weight_filler {
       type: "msra"
       variance_norm: AVERAGE
@@ -66,34 +61,30 @@ layer {
     bias_filler {
       type: "constant"
     }
-    kernel_h: 1
-    kernel_w: 4
-    stride_h: 1
-    stride_w: 1
   }
 }
-layer {
+layers {
   name: "relu_hzvt2"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "hzvt2"
   top: "hzvt2"
 }
-layer {
+layers {
   name: "hzvt3"
-  type: "Convolution"
+  type: CONVOLUTION
   bottom: "hzvt2"
   top: "hzvt3"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
+  blobs_lr: 1
+  blobs_lr: 2
   convolution_param {
-    num_output: <insert>
+    num_output: 58
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
     weight_filler {
       type: "msra"
       variance_norm: AVERAGE
@@ -101,34 +92,30 @@ layer {
     bias_filler {
       type: "constant"
     }
-    kernel_h: 1
-    kernel_w: 4
-    stride_h: 1
-    stride_w: 1
   }
 }
-layer {
+layers {
   name: "relu_hzvt3"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "hzvt3"
   top: "hzvt3"
 }
-layer {
+layers {
   name: "hzvt4"
-  type: "Convolution"
+  type: CONVOLUTION
   bottom: "hzvt3"
   top: "hzvt4"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
+  blobs_lr: 1
+  blobs_lr: 2
   convolution_param {
-    num_output: <insert>
+    num_output: 87
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
     weight_filler {
       type: "msra"
       variance_norm: AVERAGE
@@ -136,34 +123,30 @@ layer {
     bias_filler {
       type: "constant"
     }
-    kernel_h: 1
-    kernel_w: 4
-    stride_h: 1
-    stride_w: 1
   }
 }
-layer {
+layers {
   name: "relu_hzvt4"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "hzvt4"
   top: "hzvt4"
 }
-layer {
+layers {
   name: "hzvt5"
-  type: "Convolution"
+  type: CONVOLUTION
   bottom: "hzvt4"
   top: "hzvt5"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
+  blobs_lr: 1
+  blobs_lr: 2
   convolution_param {
-    num_output: <insert>
+    num_output: 130
+    kernel_w: 12
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
     weight_filler {
       type: "msra"
       variance_norm: AVERAGE
@@ -171,34 +154,30 @@ layer {
     bias_filler {
       type: "constant"
     }
-    kernel_h: 1
-    kernel_w: 12
-    stride_h: 1
-    stride_w: 1
   }
 }
-layer {
+layers {
   name: "relu_hzvt5"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "hzvt5"
   top: "hzvt5"
 }
-layer {
+layers {
   name: "hzvt6"
-  type: "Convolution"
+  type: CONVOLUTION
   bottom: "hzvt5"
   top: "hzvt6"
-  param {
-    lr_mult: 1
-  }
-  param {
-    lr_mult: 2
-  }
+  blobs_lr: 1
+  blobs_lr: 2
   convolution_param {
     num_output: 400
+    kernel_w: 1
+    kernel_h: 7
+    stride_w: 1
+    stride_h: 1
     weight_filler {
       type: "msra"
       variance_norm: AVERAGE
@@ -206,43 +185,35 @@ layer {
     bias_filler {
       type: "constant"
     }
-    kernel_h: 7
-    kernel_w: 1
-    stride_h: 1
-    stride_w: 1
   }
 }
-layer {
+layers {
   name: "relu_hzvt6"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "hzvt6"
   top: "hzvt6"
 }
-layer {
+layers {
   name: "drop_hzvt6"
-  type: "Dropout"
+  type: DROPOUT
   bottom: "hzvt6"
   top: "hzvt6"
   dropout_param {
-    dropout_ratio: <insert>
+    dropout_ratio: 0.44
   }
 }
-layer {
+layers {
   name: "final_fc"
-  type: "InnerProduct"
+  type: INNER_PRODUCT
   bottom: "hzvt6"
   top: "final_fc"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
   inner_product_param {
     num_output: 400
     weight_filler {
@@ -255,43 +226,38 @@ layer {
     }
   }
 }
-# ReLU activation created as a separate layer to allow us to extract unmodified activations
-layer {
+layers {
   name: "relu_final_fc"
-  type: "ReLU"
+  type: RELU
   relu_param {
-    negative_slope: <insert>
+    negative_slope: 0.2417
   }
   bottom: "final_fc"
   top: "final_fc_mod"
 }
-layer {
+layers {
   name: "drop_final_fc"
-  type: "Dropout"
+  type: DROPOUT
   bottom: "final_fc_mod"
   top: "final_fc_mod"
   dropout_param {
-    dropout_ratio: <insert>
+    dropout_ratio: 0.44
   }
 }
-layer {
+layers {
   name: "final_class"
-  type: "InnerProduct"
+  type: INNER_PRODUCT
   bottom: "final_fc_mod"
   top: "final_class"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 0
-  }
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
   inner_product_param {
-    num_output: <insert> # <-- equal to the number of classes in the classification task.
+    num_output: 3
     weight_filler {
       type: "xavier"
-	  variance_norm: AVERAGE
+      variance_norm: AVERAGE
     }
     bias_filler {
       type: "constant"
@@ -299,23 +265,16 @@ layer {
     }
   }
 }
-layer {
+layers {
   name: "pred"
-  type: "Softmax"
+  type: SOFTMAX
   bottom: "final_class"
   top: "pred"
 }
-layer {
+layers {
   name: "loss"
-  type: "SoftmaxWithLoss"
+  type: SOFTMAX_LOSS
   bottom: "final_class"
   bottom: "label"
   top: "loss"
-}
-layer {
-  name: "accuracy"
-  type: "Accuracy"
-  bottom: "final_class"
-  bottom: "label"
-  top: "accuracy"
 }

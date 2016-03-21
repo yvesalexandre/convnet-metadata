@@ -1,0 +1,280 @@
+name: "CDR-CNN"
+layers {
+  name: "data"
+  type: HDF5_DATA
+  top: "data"
+  top: "label"
+  hdf5_data_param {
+    source: <insert>
+    batch_size: <insert>
+    shuffle: false
+  }
+}
+layers {
+  name: "hzvt1"
+  type: CONVOLUTION
+  bottom: "data"
+  top: "hzvt1"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: <insert>
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "relu_hzvt1"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "hzvt1"
+  top: "hzvt1"
+}
+layers {
+  name: "hzvt2"
+  type: CONVOLUTION
+  bottom: "hzvt1"
+  top: "hzvt2"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: <insert>
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "relu_hzvt2"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "hzvt2"
+  top: "hzvt2"
+}
+layers {
+  name: "hzvt3"
+  type: CONVOLUTION
+  bottom: "hzvt2"
+  top: "hzvt3"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: <insert>
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "relu_hzvt3"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "hzvt3"
+  top: "hzvt3"
+}
+layers {
+  name: "hzvt4"
+  type: CONVOLUTION
+  bottom: "hzvt3"
+  top: "hzvt4"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: <insert>
+    kernel_w: 4
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "relu_hzvt4"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "hzvt4"
+  top: "hzvt4"
+}
+layers {
+  name: "hzvt5"
+  type: CONVOLUTION
+  bottom: "hzvt4"
+  top: "hzvt5"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: <insert>
+    kernel_w: 12
+    kernel_h: 1
+    stride_w: 1
+    stride_h: 1
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "relu_hzvt5"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "hzvt5"
+  top: "hzvt5"
+}
+layers {
+  name: "hzvt6"
+  type: CONVOLUTION
+  bottom: "hzvt5"
+  top: "hzvt6"
+  blobs_lr: 1
+  blobs_lr: 2
+  convolution_param {
+    num_output: <insert>
+    kernel_w: 1
+    kernel_h: 7
+    stride_w: 1
+    stride_h: 1
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layers {
+  name: "relu_hzvt6"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "hzvt6"
+  top: "hzvt6"
+}
+layers {
+  name: "drop_hzvt6"
+  type: DROPOUT
+  bottom: "hzvt6"
+  top: "hzvt6"
+  dropout_param {
+    dropout_ratio: <insert>
+  }
+}
+layers {
+  name: "final_fc"
+  type: INNER_PRODUCT
+  bottom: "hzvt6"
+  top: "final_fc"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
+    num_output: <insert>
+    weight_filler {
+      type: "msra"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "relu_final_fc"
+  type: RELU
+  relu_param {
+    negative_slope: <insert>
+  }
+  bottom: "final_fc"
+  top: "final_fc_mod"
+}
+layers {
+  name: "drop_final_fc"
+  type: DROPOUT
+  bottom: "final_fc_mod"
+  top: "final_fc_mod"
+  dropout_param {
+    dropout_ratio: <insert>
+  }
+}
+layers {
+  name: "final_class"
+  type: INNER_PRODUCT
+  bottom: "final_fc_mod"
+  top: "final_class"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
+    num_output: 3
+    weight_filler {
+      type: "xavier"
+      variance_norm: AVERAGE
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "pred"
+  type: SOFTMAX
+  bottom: "final_class"
+  top: "pred"
+}
+layers {
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "final_class"
+  bottom: "label"
+  top: "loss"
+}
